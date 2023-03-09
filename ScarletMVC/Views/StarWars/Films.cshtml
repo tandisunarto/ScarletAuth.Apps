@@ -1,0 +1,30 @@
+@model IEnumerable<Film>
+
+@{
+    ViewData["Title"] = "Films";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Films</h1>    
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Title</th>
+      <th scope="col">Director</th>
+      <th scope="col">Release Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach(var film in Model) {
+        <tr>
+            <th>@film.Id</th>
+            <td>@film.Title</td>
+            <td>@film.Director</td>
+            <td>@film.ReleaseDate</td>
+        </tr>
+    }
+  </tbody>
+</table>
