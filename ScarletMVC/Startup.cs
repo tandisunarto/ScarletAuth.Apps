@@ -80,7 +80,10 @@ namespace ScarletMVC
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IScarletApiServices, ScarletApiServices>();
             // services.AddScoped<ScarletApiHttpClient>();
-            services.AddHttpClient<ScarletApiHttpClient>();
+
+            services.AddAccessTokenManagement();
+
+            services.AddHttpClient<ScarletApiHttpClient>().AddUserAccessTokenHandler();
 
             services.AddHttpContextAccessor();
         }

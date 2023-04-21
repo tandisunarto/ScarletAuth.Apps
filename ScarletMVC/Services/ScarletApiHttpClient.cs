@@ -20,11 +20,11 @@ public class ScarletApiHttpClient
 	public ScarletApiHttpClient(HttpClient httpClient, IHttpContextAccessor httpContextAccessor)
 	{
 		this.httpContextAccessor = httpContextAccessor;
-		var token = this.httpContextAccessor.HttpContext.GetTokenAsync("access_token").GetAwaiter().GetResult();
 		this.httpClient = httpClient;
 		this.httpClient.BaseAddress = new Uri("https://localhost:55330");
 		this.httpClient.DefaultRequestHeaders.Add("Accept", "application/json");		
-		this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+		// var token = this.httpContextAccessor.HttpContext.GetTokenAsync("access_token").GetAwaiter().GetResult();
+		// this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
 	}
 
 	public async Task<IEnumerable<T>> Get<T>(string uri)
