@@ -1,0 +1,48 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "ScarletAuth.MVC",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "mvc-build",
+      "program": "${workspaceFolder}/ScarletMVC/bin/Debug/net7.0/ScarletMVC.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/ScarletMVC",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/ScarletMVC/Views"
+      }
+    },
+    {
+      "name": "ScarletAuth.WebAPI",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "api-build",
+      "program": "${workspaceFolder}/ScarletWebAPI/bin/Debug/net7.0/ScarletWebAPI.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/ScarletWebAPI",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/ScarletMVC/Views"
+      }
+    }
+  ]
+}

@@ -11,14 +11,14 @@ namespace ScarletWebAPI;
 [Route("/[controller]/[action]")]
 public class StarWarsController : ControllerBase
 {
-  	public IStarWarsHttpClient httpClient { get; private set; }
+	public IStarWarsHttpClient httpClient { get; private set; }
 
 	public StarWarsController(IStarWarsHttpClient httpClient)
 	{
 		this.httpClient = httpClient;
 	}
 
-  	[HttpGet]
+	[HttpGet]
 	[Authorize]
 	public async Task<IActionResult> Films()
 	{
@@ -41,12 +41,12 @@ public class StarWarsController : ControllerBase
 	}
 
 	[HttpGet]
-
 	public async Task<IActionResult> Species()
 	{
 		var data = await httpClient.GetData<Species>();
 		return Ok(data);
 	}
+
 	[HttpGet]
 	public async Task<IActionResult> Starships()
 	{

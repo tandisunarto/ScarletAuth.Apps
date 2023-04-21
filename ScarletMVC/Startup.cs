@@ -81,6 +81,8 @@ namespace ScarletMVC
             services.AddScoped<IScarletApiServices, ScarletApiServices>();
             // services.AddScoped<ScarletApiHttpClient>();
             services.AddHttpClient<ScarletApiHttpClient>();
+
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
