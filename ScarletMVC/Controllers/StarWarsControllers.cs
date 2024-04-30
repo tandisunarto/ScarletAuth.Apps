@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ScarletMVC.Interfaces;
 using ScarletMVC.Services;
@@ -14,6 +15,7 @@ public class StarWarsController : Controller
 		this.scarletApiServices = scarletApiServices;
 	}
 
+	[Authorize(Policy = "UserCanViewFilms")]
 	public async Task<IActionResult> Films()
 	{
 		var films = await scarletApiServices.GetFilms();

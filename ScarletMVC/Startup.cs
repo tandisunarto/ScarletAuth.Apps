@@ -12,9 +12,11 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ScarletMVC.Helpers;
 using ScarletMVC.Interfaces;
 using ScarletMVC.Models;
 using ScarletMVC.Services;
+using ScarletShared;
 
 namespace ScarletMVC
 {
@@ -65,7 +67,7 @@ namespace ScarletMVC
                 options.ClaimActions.Remove("aud");
 
                 options.ClaimActions.MapJsonKey("role", "role");
-                options.ClaimActions.MapJsonKey("email", "email");
+                options.ClaimActions.MapJsonKey("country", "country");
 
                 options.TokenValidationParameters = new()
                 {
@@ -79,11 +81,18 @@ namespace ScarletMVC
             services.Configure<IdentityServerSettings>(Configuration.GetSection($"IdentityServerSettings:{env.EnvironmentName}"));
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IScarletApiServices, ScarletApiServices>();
-            // services.AddScoped<ScarletApiHttpClient>();
 
+            services.AddAuthorization(options => {
+                options.AddPolicy("UserCanViewFilms", AuthorizationPolicies.CanViewFilms());
+            });
+
+            // ** Use IdentityModel extension method AddUserAccessTokenHandler to add access token to request header
             services.AddAccessTokenManagement();
-
             services.AddHttpClient<ScarletApiHttpClient>().AddUserAccessTokenHandler();
+            
+            // ** We can also use custom HttpMessageHandler to add access token to the request header
+            // services.AddTransient<AuthTokenHttpMessageHandler>();
+            // services.AddHttpClient<ScarletApiHttpClient>().AddHttpMessageHandler<AuthTokenHttpMessageHandler>();
 
             services.AddHttpContextAccessor();
         }
